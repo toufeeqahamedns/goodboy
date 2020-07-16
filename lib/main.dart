@@ -4,12 +4,10 @@ import 'package:goodboy/providers/message_provider.dart';
 import 'package:goodboy/providers/widget_provider.dart';
 
 import 'package:goodboy/splash_screen.dart';
-import 'package:goodboy/home_screen.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:goodboy/blocs/base_bloc.dart';
 import 'package:goodboy/blocs/base_bloc_event.dart';
-import 'package:goodboy/blocs/base_bloc_state.dart';
 
 import 'package:provider/provider.dart';
 import 'package:goodboy/providers/dialofflow_provider.dart';
@@ -62,17 +60,10 @@ class GoodBoy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+          primaryColor: Color(0xFF747FFC),
+        ),
         debugShowCheckedModeBanner: false,
-        home: BlocBuilder<BaseBloc, BaseBlocState>(
-          builder: (BuildContext context, BaseBlocState state) {
-            if (state is AppUnintialized) {
-              return SplashScreen();
-            } else if (state is AppInitialized) {
-              return HomeScreen();
-            } else {
-              return SplashScreen();
-            }
-          },
-        ));
+        home: SplashScreen());
   }
 }
