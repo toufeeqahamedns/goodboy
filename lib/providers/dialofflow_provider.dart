@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:goodboy/providers/googleAPIs_auth_provider.dart';
@@ -27,6 +28,13 @@ class DialogFlowProvider {
   }
 
   Future<dynamic> detectIntent(dynamic input) async {
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
     _dio.interceptors.add(
       InterceptorsWrapper(onRequest: (RequestOptions options) async {
         options.headers.addAll({
@@ -38,8 +46,6 @@ class DialogFlowProvider {
         print(error);
       }),
     );
-
-    // #747ffc
 
     if (!_googleAPIsAuthProvider.hasExpired) {
       Response<dynamic> response = await post(input);

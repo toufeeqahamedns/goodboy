@@ -8,18 +8,41 @@ class ListMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ListTile(title: Text(title)),
-        ListView.builder(itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            subtitle: Text(items[index]["title"]),
-          );
-        },
-        itemCount: items.length,
-        shrinkWrap: true,),
+        Container(
+          margin: const EdgeInsets.only(left: 16.0),
+          child: CircleAvatar(child: Image.asset("assets/bot.png")),
+        ),
+        Expanded(
+          child: Card(
+            shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(
+            children: <Widget>[
+              Container(
+                color: Color(0xFF747FFC),
+                child: ListTile(
+                    title: Text(
+                  title,
+                  style: TextStyle(fontSize: 24),
+                )),
+              ),
+              ListView.builder(
+                padding: const EdgeInsets.all(0.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(title: Text(items[index]["title"]));
+                },
+                itemCount: items.length,
+                shrinkWrap: true,
+              ),
+            ],
+          )),
+        ),
+        Spacer()
       ],
-    ));
+    );
   }
 }
