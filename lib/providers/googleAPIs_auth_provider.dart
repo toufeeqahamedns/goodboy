@@ -14,7 +14,7 @@ class GoogleAPIsAuthProvider {
 
   Future<void> authenticate() async {
     try {
-      await rootBundle.loadString("assets/goodboy-daoseh-7071342db28c.json").then((value) async {
+      await rootBundle.loadString("keys/goodboy-daoseh-7071342db28c.json").then((value) async {
         _projectId = json.decode(value)["project_id"];
         dynamic clientCredentials = new ServiceAccountCredentials.fromJson(value);
 
