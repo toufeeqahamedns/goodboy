@@ -35,5 +35,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - keys/goodboy-daoseh-7071342db28c.json
+    - keys/auth.json
     - assets/bot.png
